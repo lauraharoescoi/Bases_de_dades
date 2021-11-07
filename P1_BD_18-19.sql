@@ -8,7 +8,7 @@ FROM Pacient p
 	INNER JOIN Dentista d ON v.NSS = d.NSS
 GROUP BY p.NomPacient, c.nom-ciutat
 HAVING v.DataCita BETWEEN ('01/10/2018' AND '31/10/2018') AND COUNT(DISTINCT d.NSS) > 3
-ORDER Total BY DESC
+ORDER BY Total DESC
 LIMIT 10
 
 
@@ -16,6 +16,6 @@ LIMIT 10
 
 R1 = Dentista(NomDentista = 'Josep Ramón Pelegrí') [NSS]
 R2 = Tractament(PreuTractament > 100) [CodiTractament]
-R3 = R1*Visita [NumPacient, CodiTractament]
-R4 = R2*R3 [NumPacient]
-R5 = R4*Pacient [NumPacient, NomPacient]
+R3 = R1 * Visita [NumPacient, CodiTractament]
+R4 = R2 * R3 [NumPacient]
+R5 = R4 * Pacient [NumPacient, NomPacient]
