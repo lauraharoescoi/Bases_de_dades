@@ -2,10 +2,11 @@
 
 SELECT cl.DNI-cl, cl.nom, COUNT(v.DNI-cl) AS total
 FROM Clients cl
-    INNER JOIN Vendes v ON cl.DNI-cl = v.DNI-cl
-    INNER JOIN Cotxe ctx ON v.marca = ctx.marca
+    INNER JOIN Vendes v ON cl.DNI-cl = v.DNI-cl 
+        AND v.descompte < 5000 AND v.data BETWEEN ('01/01/2016' AND '31/12/2016')
+    INNER JOIN Cotxe ctx ON v.marca = ctx.marca AND ctx.categoria = 'Luxe'
 GROUP BY cl.DNI-cl, cl.nom
-HAVING v.descompte < 5000 AND v.data BETWEEN ('01/01/2016' AND '31/12/2016') AND ctx.categoria = 'Luxe' AND COUNT(v.DNI-cl) >= 5
+HAVING COUNT(v.DNI-cl) >= 5
 ORDER BY total DESC
 LIMIT 10
 

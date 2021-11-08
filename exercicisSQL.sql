@@ -76,6 +76,67 @@ Explicació: si
 
 /* Exercici 1.11 */
 
-INSERT INTO assignatura VALUES ('1', 'Bases de dades', '40');
+INSERT INTO Assignatura VALUES ('1', 'Bases de dades', '40');
+
+
+/* Exercici 1.12 */
+
+INSERT TO Alumne (nom, edat, ciutat) VALUES ('Laura', '21', 'Lleida');
+
+
+/* Exercici 1.13 */
+
+CREATE TABLE Alumnes_vells (
+	idalumne serial primary key,
+	nom varchar(20),
+	ciutat varchar(15) );
+
+INSERT INTO Alumnes_vells SELECT * FROM Alumne WHERE edad > 19;
+
+
+/* Exercici 1.14 */
+
+CREATE TABLE assignatura_massificada (
+	idassignatura serial primary key,
+	nom varchar(20) );
+
+INSERT INTO assignatura_massificada SELECT * FROM Assignatura WHERE numalumnes > 40;
+
+
+/* Exercici 1.15 */
+
+UPDATE Alumne SET edat = edat + 5;
+
+
+/* Exercici 1.16 */
+
+
+UPDATE Alumne SET nom = 'Juan' WHERE nom = 'Joan';
+
+
+/* Exercici 1.17 */
+
+UPDATE Assignatura SET nom = 'E.D.I' AND numalumnes = 250 WHERE nom = 'EDI';
+
+
+/* Exercici 1.18 */
+
+UPDATE Notes n SET n.nota = n.nota - 1 
+	FROM Assignatura a 
+	WHERE n.idassignatura = a.idassignatura AND a.nom = 'IBD' AND n.nota != NULL;
+
+
+/* Exercici 1.19 */
+
+UPDATE Notes n SET n.nota = n.nota + 1 
+	FROM Assignatura ass , Alumne al
+	WHERE n.idassignatura = ass.idassignatura AND 
+		n.idalume = al.idalumne AND ass.nom = 'IBD' AND al.edat > 19 ;
+
+
+
+/* Exercici 1.19 */
+
+
 
 

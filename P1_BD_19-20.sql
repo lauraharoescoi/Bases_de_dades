@@ -2,12 +2,13 @@
 
 SELECT p.nom, c.NomCiutat, SUM(t.PreuTractament) AS total
 FROM pacient p, 
-	INNER JOIN visita v ON p.NumPacient = v.NumPacient
+	INNER JOIN visita v ON p.NumPacient = v.NumPacient 
+		AND v.DataCita BETWEEN ('01/05/2019' AND '31/05/2019')
 	INNER JOIN doctor d ON v.NSS = d.NSS
 	INNER JOIN tractament t ON v.CodiTractament = t.CodiTractament
 	INNER JOIN ciutat c ON p.CP-pacient = c.CP
 GROUP BY p.nom, c.NomCiutat
-HAVING v.DataCita BETWEEN ('01/05/2019' AND '31/05/2019') AND COUNT(DISTINCT v.NSS) > 5
+HAVING COUNT(DISTINCT v.NSS) > 5
 ORDER BY total DESC
 LIMIT 5
 

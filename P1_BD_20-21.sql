@@ -4,10 +4,10 @@ SELECT p.titulo, per.nombre, SUM(pro.espectadores) AS Total
 FROM pelicula p
 	INNER JOIN Dirige dg ON p.idPeli = dg.idPeli
 	INNER JOIN Persona per ON p.NSS = per.NSS
-	INNER JOIN Proyeccion pro ON p.idPeli = pro.idPeli
-	INNER JOIN Cine c ON pro.idCine = c.idCine
-GROUP BY p.titulo, per.nombre
-HAVING pro.fecha BETWEEN ('01/01/2019' AND '31/12/2019') AND c.ciudad = 'Lleida'
+	INNER JOIN Proyeccion pro ON p.idPeli = pro.idPeli 
+		AND pro.fecha BETWEEN ('01/01/2019' AND '31/12/2019')
+	INNER JOIN Cine c ON pro.idCine = c.idCine AND c.ciudad = 'Lleida'
+GROUP BY p.titulo, per.nombre 
 ORDER BY Total DESC
 LIMIT 10
 	
