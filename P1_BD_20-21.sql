@@ -14,7 +14,7 @@ LIMIT 10
 /*Exercici 3.b*/	
 
 R1 = Proyeccion ('01/01/2021' AND '31/12/2021')
-R2 = (Actor * Interviene) [ciudad, IdPeli, NSS]
+R2 = (Persona * Interviene) [ciudad, IdPeli, NSS]
 R3 = R1 * R2 [idCine, idPeli, ciudad]
 R4 = Cine [ciudad = ciudad' AND idCine = idCine'] R3 [idCine, idPeli]
 R5 = R4 [idPeli != idPeli] R4 [idCine] 
