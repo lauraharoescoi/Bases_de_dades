@@ -134,8 +134,142 @@ UPDATE Notes n SET n.nota = n.nota + 1
 		n.idalume = al.idalumne AND ass.nom = 'IBD' AND al.edat > 19 ;
 
 
+/* Exercici 1.20 */
 
-/* Exercici 1.19 */
+DELETE FROM Alumne;
+
+/* Per a poder fer aquest delete, primer hauriem de eliminar la tupla de la taula Notes
+la qual està relacionada amb la taula Alumne (idalumne) */
+
+
+/* Exercici 1.21 */
+
+DELETE FROM Notes;
+
+
+/* Exercici 1.22 */
+
+DELETE FROM Notes
+	WHERE nota < 6 ;
+
+
+/* Exercici 1.23 */
+
+DELETE FROM Alumne 
+	WHERE nom = 'Abel' ;
+
+
+/* Exercici 1.24 */
+
+DELETE FROM Notes
+WHERE nota > 8 AND idassignatura IN (SELECT idassignatura FROM Assignatura WHERE nom = 'IBD');
+
+
+/* Exercici 1.25 */
+
+SELECT nom
+FROM Assignatura
+ORDER BY nom;
+
+
+/* Exercici 1.26 */
+
+SELECT ciutat
+FROM Alumne 
+WHERE edat > 18 ;
+
+
+/* Exercici 1.27 */
+
+SELECT DISTINCT ciutat
+FROM Alumne 
+WHERE edat > 18 ;
+
+
+/* Exercici 1.28 */
+
+SELECT *
+FROM Assignatura
+WHERE nom = 'LABOSOFT';
+
+
+/* Exercici 1.29 */
+
+SELECT nom, edat
+FROM Alumne
+WHERE ciutat = 'Lleida'
+ORDER BY nom;
+
+
+/* Exercici 1.30 */
+
+/* No es possible fer aquesta consulta ja que la taula assignatura no té 4 columnes*/
+
+
+/* Exercici 1.31 */
+
+SELECT *
+FROM Alumne
+WHERE edat >= 18
+ORDER BY ciutat ASC, edat DESC ;
+
+
+/* Exercici 1.32 */
+
+SELECT nom AS IDENTITAT, ciutat AS ORIGEN
+FROM Alumne
+WHERE edat >= 18
+ORDER BY ciutat ASC, edat DESC ;
+
+
+/* Exercici 1.33 */
+
+SELECT nom, edat, date_part('year', current_date) - edat AS dataNaixement
+FROM Alumne
+ORDER BY dataNaixement DESC;
+
+/* Exercici 1.34 */
+
+SELECT *
+FROM Assignatura
+WHERE numalumnes < (SELECT numalumnes FROM Assignatura WHERE nom = 'EDI') - 20 ;
+
+/* Exercici 1.35 */ 
+
+SELECT nom
+FROM Alumne
+WHERE edat IS NULL
+ORDER BY nom;
+
+SELECT nom
+FROM Alumne
+WHERE edat IS NOT NULL ;
+
+
+/* Exercici 1.36 */
+
+SELECT idalumne
+FROM Alumne
+WHERE edat >= 18
+EXCEPT
+SELECT idalumne
+FROM Notes
+WHERE nota = 10 ;
+
+
+/* Exercici 1.37 */
+
+SELECT idassignatura
+FROM Assignatura
+WHERE numalumnes >= 50
+UNION
+SELECT idassignatura
+FROM Notes
+WHERE nota = 10;
+
+
+
+
 
 
 
