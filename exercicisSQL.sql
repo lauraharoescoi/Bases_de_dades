@@ -268,9 +268,110 @@ FROM Notes
 WHERE nota = 10;
 
 
+/* Exercici 1.38 */
+
+/* Sense BETWEEN */
+SELECT nom
+FROM Alumne
+WHERE edat >= 19 AND edat <= 21
+ORDER BY nom;
+
+/* Amb BETWEEN */
+SELECT nom
+FROM Alumne
+WHERE edat BETWEEN 19 AND 21
+ORDER BY nom;
 
 
+/* Exercici 1.39 */
+
+SELECT nom
+FROM Alumne
+WHERE nom LIKE 'A%' OR nom LIKE 'M%' ;
 
 
+/* Exercici 1.40 */
+
+SELECT nom 
+FROM Alumne
+WHERE nom LIKE '______%';
+
+/* Exercici 1.41 */
+
+SELECT *
+FROM Assignatura
+WHERE numalumnes IN (30,60)
+ORDER BY nom;
+
+/* Exercici 1.42 */
+
+SELECT nom
+FROM Alumne
+EXCEPT
+SELECT nom
+FROM Alumne al JOIN Notes ON al.idalumne = n.idalumne;
+
+/* Exercici 1.43 */
+
+SELECT nom
+FROM Alumne
+WHERE EXIST (SELECT * 
+			FROM Notes
+			WHERE nota > 5);
 
 
+/* Exercici 1.44 */
+
+INSERT INTO Assignatura (Nom, numalumnes) VALUES ('PROG', 120);
+INSERT INTO Assignatura (Nom, numalumnes) VALUES ('MATDIS', 180);
+
+SELECT *
+FROM Assignatura
+
+EXCEPT
+
+SELECT *
+FROM Assignatura
+WHERE EXIST (SELECT *
+			FROM Notes
+			WHERE nota IS NOT NULL);
+
+
+/* Exercici 1.45 */
+
+SELECT nom ||''|| COALESCE(edat, '-666') AS "Nom i edat"
+FROM Alumne;
+
+
+/* Exercici 1.46 */
+
+SELECT nom
+FROM Assignatura
+WHERE LENGTH(nom) = 5
+ORDER BY nom;
+
+
+/* Exercici 1.47 */
+
+SELECT SUBSTR(nom, 1, 2) AS "TRES PRIMERES"
+FROM Alumne
+WHERE SUBSTR(nom, 1, 1) = 'M';
+
+
+/* Exercici 1.48 */
+
+SELECT SUBSTR(nom, 1, 3) AS "TRES PRIMERES"
+FROM Alumne
+WHERE nom LIKE 'A%'
+
+
+/* Exercici 1.49 */
+
+SELECT SUBSTR(ciutat, LENGTH(ciutat) - 3, 4) AS "QUATRE DARRERES"
+FROM Alumne
+
+
+/* Exercici 1.50 */
+
+SELECT TRANSLATE(nom, 'a', '*')  AS "NOM CANVIAT"
+FROM Alumne
